@@ -19,7 +19,8 @@
 
 	aliases {
 		ethernet0 = &gmac0;
-		mmc0 = &sdmmc;
+		mmc1 = &sdmmc;
+        mmc0 = &sdhci;
 	};
 
 	chosen {
@@ -157,13 +158,13 @@
 		vin-supply = <&vcc_3v3_s3>;
 	};
 
-	vcc_3v3_ufs_s0: regulator-vcc-ufs-s0 {
+	vcc_2v5_3v3_ufs_s0: regulator-vcc-2v5-3v3-ufs-s0 {
 		compatible = "regulator-fixed";
 		regulator-always-on;
 		regulator-boot-on;
-		regulator-min-microvolt = <3300000>;
-		regulator-max-microvolt = <3300000>;
-		regulator-name = "vcc_3v3_ufs_s0";
+		regulator-min-microvolt = <2500000>;
+		regulator-max-microvolt = <2500000>;
+		regulator-name = "vcc_2v5_3v3_ufs_s0";
 		vin-supply = <&vcc_5v0_sys>;
 	};
 
@@ -788,6 +789,17 @@
 	status = "okay";
 };
 
+&sdhci {
+	bus-width = <8>;
+	no-sdio;
+	no-sd;
+	non-removable;
+	max-frequency = <200000000>;
+	mmc-hs400-1_8v;
+	mmc-hs400-enhanced-strobe;
+	full-pwr-cycle-in-suspend;
+	status = "okay";
+};
 
 &sfc0 {
 	pinctrl-names = "default";
